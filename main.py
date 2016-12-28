@@ -14,7 +14,7 @@ if __name__=="__main__":
             query.choose_options()
 
             char_limit = input("Would you like a char limit? If not, leave empty. Ex. >200 (greater than 200 chars), <500 (less than 500 chars): ")
-            query.choose_char_limit(char_limit)
+            char_limit = query.choose_char_limit(char_limit)
             
         else:
             query_loop = false
