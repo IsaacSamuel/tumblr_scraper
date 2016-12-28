@@ -4,7 +4,7 @@ class Query:
         self.url = url
         self.page_limit = page_limit
 
-    def choose_options():
+    def choose_options(self):
         print("Options are: text, image, video, quote, or chat.")
         self.text = False
         self.image = False
@@ -15,28 +15,33 @@ class Query:
         option_loop = True
         
         while option_loop:
-            option = [input("Please enter your options; type done when done.")]
+            option = input("Please enter your options; type done when done: ")
             if option == "text":
-                options["text"] = True
+                self.text = True
             if option == "image":
-                options["image"] = True
+                self.image = True
             if option == "video":
-                options["video"] = True
+                self.video = True
             if option == "quote":
-                options["quote"] = True
+                self.quote = True
             if option == "chat":
-                options["chat"] = True
+                self.chat = True
             if option == "done":
-                option_loop = false
+                option_loop = False
 
-    def choose_char_limit(char_lim):
+    def choose_char_limit(self, char_lim):
         less_than = False
         
-        if char_limit != "":
-            if char_limit[0] = "<":
+        if char_lim != "":
+            if char_lim[0] == "<":
                 self.less_than = True
-            else if char_limit[0] = ">":
+            elif char_lim[0] == ">":
                 self.less_than = False
-            self.char_limit = int(char_limit[1, -1])
+                
+            self.char_limit = int(char_lim[1, -1])  
+            return True
+        
+        else:
+            return False
 
         
