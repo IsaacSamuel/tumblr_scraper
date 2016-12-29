@@ -3,12 +3,14 @@ from urllib.request import urlopen
 
 
 class Scraper:
-
-    def __main__(self):
-    
-    def make_soup(self, url):
+    def __init__(self, url):
         html = urlopen(url).read()
-        return BeautifulSoup(html, "lxml")
+        self.soup = BeautifulSoup(html, "lxml")
         
-    def check_page_number(self, limit):
+        
+    def has_content(self):
+        if self.soup.find_all(string=".post"):
+            return True
+        else:
+            return False
         

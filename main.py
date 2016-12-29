@@ -42,14 +42,14 @@ if __name__=="__main__":
 
             scraper = Scraper(url)
             
-            while scraper.has_content(url)
+            while scraper.has_content()
                 url = form_url(query.url, count)
                 get_matching_posts(query.options, query.is_limit, query.less_than, query.char_limit):
                     
 
 
 def form_url(url, page_number):
-    if page_limit:
+    if query.page_limit:
         return page.url+"/page/"+(page_number)
     else:
         return page.url+"/page/"+(page_number)
@@ -57,10 +57,12 @@ def form_url(url, page_number):
 def get_matching_posts(query.options, query.is_limit, query.less_than, query.char_limit):
     if query.is_limit():
         #read webpage, pull out links with criteria
+        scraper.extract_matching_options(self.options)
         #remove the ones that exceed, underceed the character limit
 
     else:
-        #read the webpage
+        #read the webpage, pull out links with criteria
+        scraper.extract_matching_options(self.options)
                         
 
         
