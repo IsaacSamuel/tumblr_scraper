@@ -23,19 +23,19 @@ class Scraper:
 
 	def extract_matching_post_types(self, options):
 		self.extracted_posts= []
-			if options["text"]:
-				for post in self.soup.find_all("div", {"class" : "post post-type-text"}):
-					self.extracted_posts.appends(post)
-			if options["image"]:
-				for post in self.soup.find_all("div", {"class" : "post post-type-image"}):
-					self.extracted_posts.appends(post)
-			if options["video"]:
-				for post in self.soup.find_all("div", {"class" : "post post-type-video"}):
-					self.extracted_posts.appends(post)
-			if options["chat"]:
-				for post in self.soup.find_all("div", {"class" : "post post-type-chat"}):
-					self.extracted_posts.appends(post)
-			if options["quote"]:
-				for post in self.soup.find_all("div", {"class" : "post post-type-quote"}):
-					self.extracted_posts.appends(post)
+		if options["text"]:
+			for post in self.soup.find_all("div", {"class" : "post post-type-text"}):
+				self.extracted_posts.appends(post)
+		if options["image"]:
+			for post in self.soup.find_all("div", {"class" : "post post-type-image"}):
+				self.extracted_posts.appends(post)
+		if options["video"]:
+			for post in self.soup.find_all("div", {"class" : "post post-type-video"}):
+				self.extracted_posts.appends(post)
+		if options["chat"]:
+			for post in self.soup.find_all("div", {"class" : "post post-type-chat"}):
+				self.extracted_posts.appends(post)
+		if options["quote"]:
+			for post in self.soup.find_all("div", {"class" : "post post-type-quote"}):
+				self.extracted_posts.appends(post)
 		

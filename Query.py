@@ -41,7 +41,7 @@ class Query:
 			elif char_lim[0] == ">":
 				self.less_than = False
 				
-			self.char_limit = int(char_lim[1, -1])
+			self.char_limit = int(char_lim[1:])
 			self.is_limit = True
 	
 		else:
