@@ -34,17 +34,18 @@ class Query:
 	def choose_char_limit(self, char_lim):
 		self.less_than = False
 		self.char_limit = 0
-		
+
 		if char_lim is not "":
 			if char_lim[0] == "<":
 				self.less_than = True
 			elif char_lim[0] == ">":
 				self.less_than = False
-				
+			else:
+				raise TypeError
+			
 			self.char_limit = int(char_lim[1:])
 			self.is_limit = True
-	
+
 		else:
 			self.is_limit = False
-
 		
