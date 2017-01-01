@@ -21,11 +21,21 @@ class Scraper:
 		return False
 
 
+	"""
+	Will implement sorting by date later. Use datetime module.
+	def extract_date(self, post):
+		soup = BeautifulSoup(str(post), 'lxml')
+		for each in soup.find_all("div", {"class" : "date"}):
+			self.extracted_posts.append(each)
+	"""
+
+
 	def extract_matching_post_types(self, options):
 		self.extracted_posts= []
 		if options["text"]:
 			for post in self.soup.find_all("div", {"class" : "post post-type-text"}):
 				self.extracted_posts.append(post)
+
 		if options["image"]:
 			for post in self.soup.find_all("div", {"class" : "post post-type-image"}):
 				self.extracted_posts.append(post)
@@ -55,6 +65,3 @@ class Scraper:
 						self.extracted_posts.append(post)
 
 
-
-
-		

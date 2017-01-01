@@ -1,23 +1,24 @@
 from Query import Query
 from Scraper import Scraper
+import os
+
 
 def form_url(url, page_number):
-	if query.page_limit:
-		return url+"/page/"+str(page_number)
-	else:
-		return url+"/page/"+str(page_number)
+	return url+"/page/"+str(page_number)
 
 def get_matching_posts(options):
-	if query.is_limit():
+	if query.is_limit:
 		#read the webpage, pull out posts that match the criteria
 		scraper.extract_matching_post_types(options)
 		#remove the ones that exceed, underceed the character limit
 		scraper.extract_posts_matching_char_limit(query.less_than, query.char_limit)
 
+		scrapes.append(scraper.extracted_posts)
+
 	else:
 		#read the webpage, pull out posts that match the criteria
 		scraper.extract_matching_post_types(options)
-
+		scrapes.append(scraper.extracted_posts)
 
 
 if __name__=="__main__":
@@ -46,26 +47,37 @@ if __name__=="__main__":
 			
 	#Scrapes the webpages
 	for query in queries:
-		
+		scrapes = []
 		if query.page_limit != 0:
 			for page in range(query.page_limit):
 				url = form_url(query.url, page+1)
 
 				scraper = Scraper(url)
-				scraper.get_matching_posts(query.options)
+				get_matching_posts(query.options)
 					
 
 		else:
 			count = 1
 			url = form_url(query.url, count)
-
 			scraper = Scraper(url)
 			
 			while scraper.has_content():
-				scraper.get_matching_posts
+				get_matching_posts(query.options)
 				count += 1
 				url = form_url(query.url, count)
 				scraper = Scraper(url)
+
+
+	#Writes to file
+	name = input("What would you like to name your file? ") + ".html"
+	cwd = os.chdir(os.getcwd() + "/output")
+	file = open(name, "w")
+	file.truncate()
+	for scrape in scrapes:
+		file.write(str(scrape))
+
+
+
 				
 
 		
