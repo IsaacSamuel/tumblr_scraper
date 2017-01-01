@@ -25,17 +25,36 @@ class Scraper:
 		self.extracted_posts= []
 		if options["text"]:
 			for post in self.soup.find_all("div", {"class" : "post post-type-text"}):
-				self.extracted_posts.appends(post)
+				self.extracted_posts.append(post)
 		if options["image"]:
 			for post in self.soup.find_all("div", {"class" : "post post-type-image"}):
-				self.extracted_posts.appends(post)
+				self.extracted_posts.append(post)
 		if options["video"]:
 			for post in self.soup.find_all("div", {"class" : "post post-type-video"}):
-				self.extracted_posts.appends(post)
+				self.extracted_posts.append(post)
 		if options["chat"]:
 			for post in self.soup.find_all("div", {"class" : "post post-type-chat"}):
-				self.extracted_posts.appends(post)
+				self.extracted_posts.append(post)
 		if options["quote"]:
 			for post in self.soup.find_all("div", {"class" : "post post-type-quote"}):
-				self.extracted_posts.appends(post)
+				self.extracted_posts.append(post)
+
+
+	def extract_posts_matching_char_limit(self, less_than, char_lim):
+		temp_posts = self.extracted_posts
+		self.extracted_posts = []
+
+		for post in self.extracted_posts:
+			soup = BeautifulSoup(str(post), 'lxml')
+			for each in soup.find_all("div", {"class" : "post-content"}):
+				if less_than:
+					if (str(BeautifulSoup(each, "lxml").p).length() <= char_lim + 7):
+						self.extracted_posts.append(post)
+				if not less_than:
+					if (str(BeautifulSoup(each, "lxml").p).length() >= char_lim + 7):
+						self.extracted_posts.append(post)
+
+
+
+
 		

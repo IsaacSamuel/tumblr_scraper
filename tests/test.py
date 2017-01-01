@@ -109,9 +109,8 @@ class Query_char_limit_input(unittest.TestCase):
 
 #Tests the function has_limit in the Scraper class
 class Scaper_has_limit_input:
-
 	#We're using soup I saved to text file, because we know their attributes
-	#We need a mock class, because the regular Scraper.__init__() always checks for a real webpage
+	#We need a mock class, because the regular Scraper.__init__() always requests a real webpage
 	class Mock(Scraper):
 		def __init__(self, soup):
 			self.soup = BeautifulSoup(soup, "lxml")
@@ -127,6 +126,8 @@ class Scaper_has_limit_input:
 
 	def test_page_without_posts(self):
 		self.assertFalse(self.without_posts)
+
+
 
 if __name__=="__main__":
 	unittest.main()

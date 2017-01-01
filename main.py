@@ -12,6 +12,7 @@ def get_matching_posts(options):
 		#read the webpage, pull out posts that match the criteria
 		scraper.extract_matching_post_types(options)
 		#remove the ones that exceed, underceed the character limit
+		scraper.extract_posts_matching_char_limit(query.less_than, query.char_limit)
 
 	else:
 		#read the webpage, pull out posts that match the criteria
@@ -51,7 +52,6 @@ if __name__=="__main__":
 				url = form_url(query.url, page+1)
 
 				scraper = Scraper(url)
-
 				scraper.get_matching_posts(query.options)
 					
 
