@@ -2,12 +2,15 @@ import os
 parent_directory = os.path.abspath("..")
 import sys
 sys.path.append(parent_directory)
+from bs4 import BeautifulSoup
+from bs4 import Comment
 
 from Scraper import Scraper
 from Query import Query
 
 import unittest
 
+#Tests the function check_char_limit in the Query class
 class Query_char_limit_input(unittest.TestCase):
 
 	no_input = {
@@ -32,7 +35,7 @@ class Query_char_limit_input(unittest.TestCase):
 	#For comparison tests
 	#creates dummy query, calls choose_char_limit, collects object vals in a dictionary
 	def set_test_vals(self, char_limit):
-		query = Query("www.whatever.com", 0)
+		query = Query("www.irrelevant.com", 0)
 
 		query.choose_char_limit(char_limit)
 
@@ -44,6 +47,7 @@ class Query_char_limit_input(unittest.TestCase):
 
 
 	#Tests
+	#Comparison tests
 	#Test should pass when user inputs nothing
 	def test_no_input(self):
 		no_input = {
@@ -88,16 +92,41 @@ class Query_char_limit_input(unittest.TestCase):
 		self.assertNotEqual(self.no_input, self.query_vals)
 		self.assertNotEqual(self.above_200, self.query_vals)
 
+
+
+	#Start bad input tests
 	def test_bad_input_has_wrong_character(self):
-		query = Query("www.whatever.com", 0)
+		query = Query("www.irrelevant.com", 0)
 
 		self.assertRaises(TypeError, query.choose_char_limit, "1a462")
 		self.assertRaises(TypeError, query.choose_char_limit, "a1462")
 
 	def test_bad_input_no_sign(self):
-		query = Query("www.whatever.com", 0)
+		query = Query("www.irrelevant.com", 0)
 
 		self.assertRaises(TypeError, query.choose_char_limit, "1000")
+
+
+#Tests the function has_limit in the Scraper class
+class Scaper_has_limit_input:
+
+	#We're using soup I saved to text file, because we know their attributes
+	#We need a mock class, because the regular Scraper.__init__() always checks for a real webpage
+	class Mock(Scraper):
+		def __init__(self, soup):
+			self.soup = BeautifulSoup(soup, "lxml")
+
+	soup_with_posts = open("canned_soup.txt", "r") 
+	soup_without_posts = open("emptypage.txt", "r")
+
+	with_posts = Mock(soup_with_posts.read())
+	withput_posts = Mock(soup_with_posts.read())
+
+	def test_page_with_posts(self):
+		self.assertTrue(self.with_posts)
+
+	def test_page_without_posts(self):
+		self.assertFalse(self.without_posts)
 
 if __name__=="__main__":
 	unittest.main()
