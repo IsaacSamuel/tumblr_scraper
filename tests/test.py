@@ -107,8 +107,8 @@ class Query_char_limit_input(unittest.TestCase):
 		self.assertRaises(TypeError, query.choose_char_limit, "1000")
 
 
-#Tests the function has_limit in the Scraper class
-class Scaper_has_limit_input:
+#Tests the function has_content in the Scraper class
+class Scaper_has_content_input(unittest.TestCase):
 	#We're using soup I saved to text file, because we know their attributes
 	#We need a mock class, because the regular Scraper.__init__() always requests a real webpage
 	class Mock(Scraper):
@@ -119,13 +119,13 @@ class Scaper_has_limit_input:
 	soup_without_posts = open("emptypage.txt", "r")
 
 	with_posts = Mock(soup_with_posts.read())
-	withput_posts = Mock(soup_with_posts.read())
+	without_posts = Mock(soup_with_posts.read())
 
 	def test_page_with_posts(self):
-		self.assertTrue(self.with_posts)
+		self.assertTrue(self.with_posts.has_content())
 
 	def test_page_without_posts(self):
-		self.assertFalse(self.without_posts)
+		self.assertFalse(self.without_posts.has_content())
 
 
 

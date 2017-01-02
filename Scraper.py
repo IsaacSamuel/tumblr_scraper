@@ -35,7 +35,6 @@ class Scraper:
 		if options["text"]:
 			for post in self.soup.find_all("div", {"class" : "post post-type-text"}):
 				self.extracted_posts.append(post)
-
 		if options["image"]:
 			for post in self.soup.find_all("div", {"class" : "post post-type-image"}):
 				self.extracted_posts.append(post)
@@ -54,14 +53,14 @@ class Scraper:
 		temp_posts = self.extracted_posts
 		self.extracted_posts = []
 
-		for post in self.extracted_posts:
+		for post in temp_posts:
 			soup = BeautifulSoup(str(post), 'lxml')
 			for each in soup.find_all("div", {"class" : "post-content"}):
 				if less_than:
-					if (str(BeautifulSoup(each, "lxml").p).length() <= char_lim + 7):
+					if len(str(each)) <= (char_lim + 7):
 						self.extracted_posts.append(post)
 				if not less_than:
-					if (str(BeautifulSoup(each, "lxml").p).length() >= char_lim + 7):
+					if len(str(each)) <= (char_lim + 7):
 						self.extracted_posts.append(post)
 
 

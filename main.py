@@ -46,8 +46,8 @@ if __name__=="__main__":
 
 			
 	#Scrapes the webpages
+	scrapes = []
 	for query in queries:
-		scrapes = []
 		if query.page_limit != 0:
 			for page in range(query.page_limit):
 				url = form_url(query.url, page+1)
@@ -69,12 +69,16 @@ if __name__=="__main__":
 
 
 	#Writes to file
-	name = input("What would you like to name your file? ") + ".html"
-	cwd = os.chdir(os.getcwd() + "/output")
-	file = open(name, "w")
-	file.truncate()
-	for scrape in scrapes:
-		file.write(str(scrape))
+	if scrapes:
+		name = input("What would you like to name your file? ") + ".html"
+		cwd = os.chdir(os.getcwd() + "/output")
+		file = open(name, "w")
+		file.truncate()
+		for scrape in scrapes:
+			file.write(str(scrape))
+		print("Matching posts written to "+name)
+	else:
+		print("No matching posts found.")
 
 
 
